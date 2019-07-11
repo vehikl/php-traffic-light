@@ -1,0 +1,12 @@
+{
+    "name": "vehikl/php-traffic-light",
+    "description": "Extend PHPUnit to control the traffic light based on test results.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Christian Griffin",
+            "email": "c.griffin@vehikl.com"
+        }
+    ],
+    "require": {}
+}
