@@ -8,5 +8,14 @@
             "email": "c.griffin@vehikl.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpTrafficLight\\": "src",
+            "PhpTrafficLight\\Tests\\": "tests"
+        }
+    }
 }
