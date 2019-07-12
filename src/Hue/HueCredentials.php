@@ -7,37 +7,37 @@ class HueCredentials
     /**
      * @var string
      */
-    private $clientId;
+    private $bridgeIp;
 
     /**
      * @var string
      */
-    private $clientSecret;
+    private $bridgeUser;
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
+     * @param string $bridgeIp
+     * @param string $bridgeUser
      * @return void
      */
-    public function __construct(string $clientId, string $clientSecret)
+    public function __construct(string $bridgeIp, string $bridgeUser)
     {
-        $this->clientId = $clientId;
-        $this->clientSecret = $clientSecret;
+        $this->bridgeIp = $bridgeIp;
+        $this->bridgeUser = $bridgeUser;
     }
 
     /**
      * @return string
      */
-    public function getClientId(): string
+    public function getBridgeIp(): string
     {
-        return $this->clientId;
+        return $this->bridgeIp;
     }
 
     /**
      * @return string
      */
-    public function getClientSecret(): string
+    public function getBridgeUser(): string
     {
-        return $this->clientSecret;
+        return $this->bridgeUser;
     }
 }

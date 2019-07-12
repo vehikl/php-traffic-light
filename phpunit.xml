@@ -13,9 +13,6 @@
             <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
-    <extensions>
-        <extension class="PhpTrafficLight\TrafficLightExtension" />
-    </extensions>
     <testsuites>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
@@ -27,7 +24,4 @@
     <logging>
         <log type="coverage-clover" target="clover.xml"/>
     </logging>
-    <php>
-        <env name="TRAFFIC_LIGHT_ENABLED" value="1"/>
-    </php>
 </phpunit>
