@@ -2,9 +2,8 @@
 
 namespace PhpTrafficLight\Tests\Unit;
 
-use PhpTrafficLight\Light;
+use PhpTrafficLight\Tests\Fakes\Light;
 use PhpTrafficLight\Tests\TestCase;
-use PhpTrafficLight\Tests\Fakes\TrafficLightApi;
 use PhpTrafficLight\TrafficLight;
 
 final class TrafficLightTest extends TestCase
@@ -14,14 +13,57 @@ final class TrafficLightTest extends TestCase
      */
     public function testItCanBeInstantiatedWithThreeLightInterfaces(): void
     {
-        $api = new TrafficLightApi;
         $this->assertInstanceOf(
             TrafficLight::class,
-            new TrafficLight(
-                new Light('red', $api),
-                new Light('yellow', $api),
-                new Light('green', $api)
-            )
+            new TrafficLight(new Light, new Light, new Light)
         );
+    }
+
+    /**
+     * @return void
+     */
+    public function testItActivatesOnlyTheYellowLightWhenTestsAreRunning(): void
+    {
+        $redLight = new Light;
+        $yellowLight = new Light;
+        $greenLight = new Light;
+        $trafficLight = new TrafficLight($redLight, $yellowLight, $greenLight);
+
+        $trafficLight->testsAreRunning();
+        $redLight->assertOff();
+        $yellowLight->assertOn();
+        $greenLight->assertOff();
+    }
+
+    /**
+     * @return void
+     */
+    public function testItActivatesOnlyTheRedLightWhenTestsFailed(): void
+    {
+        $redLight = new Light;
+        $yellowLight = new Light;
+        $greenLight = new Light;
+        $trafficLight = new TrafficLight($redLight, $yellowLight, $greenLight);
+
+        $trafficLight->testsFailed();
+        $redLight->assertOn();
+        $yellowLight->assertOff();
+        $greenLight->assertOff();
+    }
+
+    /**
+     * @return void
+     */
+    public function testItActivatesOnlyTheGreenLightWhenTestsPassed(): void
+    {
+        $redLight = new Light;
+        $yellowLight = new Light;
+        $greenLight = new Light;
+        $trafficLight = new TrafficLight($redLight, $yellowLight, $greenLight);
+
+        $trafficLight->testsPassed();
+        $redLight->assertOff();
+        $yellowLight->assertOff();
+        $greenLight->assertOn();
     }
 }
