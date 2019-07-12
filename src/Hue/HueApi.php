@@ -1,11 +1,25 @@
 <?php
 
-namespace PhpTrafficLight;
+namespace PhpTrafficLight\Hue;
 
 use PhpTrafficLight\Interfaces\TrafficLightApiInterface;
 
 class HueApi implements TrafficLightApiInterface
 {
+    /**
+     * @var HueCredentials
+     */
+    private $credentials;
+
+    /**
+     * @param HueCredentials $credentials
+     * @return void
+     */
+    public function __construct(HueCredentials $credentials)
+    {
+        $this->credentials = $credentials;
+    }
+
     /**
      * @param string $id
      * @return bool

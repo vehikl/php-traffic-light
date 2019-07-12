@@ -2,6 +2,8 @@
 
 namespace PhpTrafficLight;
 
+use PhpTrafficLight\Hue\HueApi;
+use PhpTrafficLight\Hue\HueCredentials;
 use PHPUnit\Runner\AfterLastTestHook;
 use PHPUnit\Runner\AfterTestErrorHook;
 use PHPUnit\Runner\AfterTestFailureHook;
@@ -26,18 +28,30 @@ class TrafficLightExtension implements
     private static $hasFailure = false;
 
     /**
+     * @var bool
+     */
+    private $enabled = false;
+
+    /**
      * @return void
      */
     public function __construct()
     {
-        $api = new HueApi;
+        if(getenv('TRAFFIC_LIGHT_ENABLED') !== '1') {
+            return;
+        }
+
+        $this->enabled = true;
+        $api = new HueApi(new HueCredentials(
+            getenv('TRAFFIC_LIGHT_CLIENT_ID'),
+            getenv('TRAFFIC_LIGHT_CLIENT_SECRET')
+        ));
+
         self::$trafficLight = new TrafficLight(
             new Light('red', $api),
             new Light('yellow', $api),
             new Light('green', $api)
         );
-
-        self::$trafficLight->testsAreRunning();
     }
 
     /**
@@ -45,6 +59,10 @@ class TrafficLightExtension implements
      */
     public function executeBeforeFirstTest(): void
     {
+        if(!$this->isEnabled()) {
+            return;
+        }
+
         self::$trafficLight->testsAreRunning();
     }
 
@@ -75,11 +93,23 @@ class TrafficLightExtension implements
      */
     public function executeAfterLastTest(): void
     {
+        if(!$this->isEnabled()) {
+            return;
+        }
+
         if (self::$hasFailure) {
             self::$trafficLight->testsFailed();
             return;
         }
 
         self::$trafficLight->testsPassed();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
     }
 }
