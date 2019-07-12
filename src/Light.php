@@ -2,9 +2,10 @@
 
 namespace PhpTrafficLight;
 
+use PhpTrafficLight\Interfaces\LightInterface;
 use PhpTrafficLight\Interfaces\TrafficLightApiInterface;
 
-class Light
+class Light implements LightInterface
 {
     /**
      * @var TrafficLightApiInterface
@@ -28,18 +29,20 @@ class Light
     }
 
     /**
-     * @return void
+     * @return bool
      */
-    public function deactivate(): void
+    public function deactivate(): bool
     {
         $this->api->deactivateLight($this->id);
+        return true;
     }
 
     /**
-     * @return void
+     * @return bool
      */
-    public function activate(): void
+    public function activate(): bool
     {
         $this->api->activateLight($this->id);
+        return true;
     }
 }

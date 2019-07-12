@@ -12,7 +12,7 @@ final class TrafficLightTest extends TestCase
     /**
      * @return void
      */
-    public function testItCanBeInstantiatedWithThreeLights(): void
+    public function testItCanBeInstantiatedWithThreeLightInterfaces(): void
     {
         $api = new TrafficLightApi;
         $this->assertInstanceOf(

@@ -2,6 +2,8 @@
 
 namespace PhpTrafficLight;
 
+use PhpTrafficLight\Interfaces\LightInterface;
+
 class TrafficLight
 {
     /**
@@ -20,12 +22,12 @@ class TrafficLight
     private $greenLight;
 
     /**
-     * @param Light $redLight
-     * @param Light $yellowLight
-     * @param Light $greenLight
+     * @param LightInterface $redLight
+     * @param LightInterface $yellowLight
+     * @param LightInterface $greenLight
      * @return void
      */
-    public function __construct(Light $redLight, Light $yellowLight, Light $greenLight)
+    public function __construct(LightInterface $redLight, LightInterface $yellowLight, LightInterface $greenLight)
     {
         $this->redLight = $redLight;
         $this->yellowLight = $yellowLight;
