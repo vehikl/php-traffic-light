@@ -51,7 +51,7 @@ class Light implements LightInterface
     /**
      * @return void
      */
-    public function assertON(): void
+    public function assertOn(): void
     {
         Assert::assertEquals(self::LIGHT_ON, $this->state, 'Failed asserting that light is on.');
     }
