@@ -3,6 +3,9 @@
 namespace PhpTrafficLight\Hue;
 
 use PhpTrafficLight\Interfaces\TrafficLightApiInterface;
+use Phue\Client;
+use Phue\Command\GetLightById;
+use Phue\Light;
 
 class HueApi implements TrafficLightApiInterface
 {
@@ -12,12 +15,18 @@ class HueApi implements TrafficLightApiInterface
     private $credentials;
 
     /**
+     * @var Client
+     */
+    private $client;
+
+    /**
      * @param HueCredentials $credentials
      * @return void
      */
     public function __construct(HueCredentials $credentials)
     {
         $this->credentials = $credentials;
+        $this->client = new Client($this->credentials->getBridgeIp(), $this->credentials->getBridgeUser());
     }
 
     /**
@@ -26,7 +35,9 @@ class HueApi implements TrafficLightApiInterface
      */
     public function activateLight(string $id): bool
     {
-        echo "Light '{$id}' is ON.\n";
+        /** @var Light $light */
+        $light = $this->client->sendCommand(new GetLightById($id));
+        $light->setBrightness(255);
         return true;
     }
 
@@ -36,7 +47,9 @@ class HueApi implements TrafficLightApiInterface
      */
     public function deactivateLight(string $id): bool
     {
-        echo "Light '{$id}' is OFF.\n";
+        /** @var Light $light */
+        $light = $this->client->sendCommand(new GetLightById($id));
+        $light->setBrightness(0);
         return true;
     }
 }
