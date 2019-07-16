@@ -18,6 +18,21 @@ class TrafficLightExtension implements
     AfterTestErrorHook
 {
     /**
+     * @const int
+     */
+    const RED_LIGHT_ID = 5;
+
+    /**
+     * @const int
+     */
+    const YELLOW_LIGHT_ID = 7;
+
+    /**
+     * @const int
+     */
+    const GREEN_LIGHT_ID = 6;
+
+    /**
      * @var TrafficLight
      */
     private static $trafficLight;
@@ -48,9 +63,9 @@ class TrafficLightExtension implements
         ));
 
         self::$trafficLight = new TrafficLight(
-            new Light('red', $api),
-            new Light('yellow', $api),
-            new Light('green', $api)
+            new Light(self::RED_LIGHT_ID, $api),
+            new Light(self::YELLOW_LIGHT_ID, $api),
+            new Light(self::GREEN_LIGHT_ID, $api)
         );
     }
 
