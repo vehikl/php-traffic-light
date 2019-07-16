@@ -37,6 +37,7 @@ class HueApi implements TrafficLightApiInterface
     {
         /** @var Light $light */
         $light = $this->client->sendCommand(new GetLightById($id));
+        $light->setOn(true);
         $light->setBrightness(255);
         return true;
     }
@@ -49,7 +50,7 @@ class HueApi implements TrafficLightApiInterface
     {
         /** @var Light $light */
         $light = $this->client->sendCommand(new GetLightById($id));
-        $light->setBrightness(0);
+        $light->setOn(false);
         return true;
     }
 }
