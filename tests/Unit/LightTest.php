@@ -13,7 +13,6 @@ final class LightTest extends TestCase
      */
     public function testItCanBeInstantiatedWithAColorAndATrafficLightApiInterface(): void
     {
-        sleep(2);
         $this->assertInstanceOf(Light::class, new Light('red', new TrafficLightApi));
     }
 
