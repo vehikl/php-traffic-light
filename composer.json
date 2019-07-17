@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "sqmk/phue": "^1.7"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.1"

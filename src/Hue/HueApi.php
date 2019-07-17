@@ -2,17 +2,20 @@
 
 namespace PhpTrafficLight\Hue;
 
+use GuzzleHttp\Client;
 use PhpTrafficLight\Interfaces\TrafficLightApiInterface;
-use Phue\Client;
-use Phue\Command\GetLightById;
-use Phue\Light;
 
 class HueApi implements TrafficLightApiInterface
 {
     /**
-     * @var HueCredentials
+     * @const string
      */
-    private $credentials;
+    const BRIDGE_IP = '192.168.231.142';
+
+    /**
+     * @const string
+     */
+    const BRIDGE_USER = '1wpU93QA4DHwT7udr7ad8rHtgFynLMAWLx2ZYRwe';
 
     /**
      * @var Client
@@ -20,13 +23,13 @@ class HueApi implements TrafficLightApiInterface
     private $client;
 
     /**
-     * @param HueCredentials $credentials
      * @return void
      */
-    public function __construct(HueCredentials $credentials)
+    public function __construct()
     {
-        $this->credentials = $credentials;
-        $this->client = new Client($this->credentials->getBridgeIp(), $this->credentials->getBridgeUser());
+        $this->client = new Client([
+            'base_uri' => 'http://' . self::BRIDGE_IP . '/api/' . self::BRIDGE_USER . '/'
+        ]);
     }
 
     /**
@@ -35,10 +38,14 @@ class HueApi implements TrafficLightApiInterface
      */
     public function activateLight(string $id): bool
     {
-        /** @var Light $light */
-        $light = $this->client->sendCommand(new GetLightById($id));
-        $light->setOn(true);
-        $light->setBrightness(255);
+        $this->client->put("lights/{$id}/state", [
+            'json' => [
+                'on' => true,
+                'transitiontime' => 0,
+                'bri' => 254
+            ]
+        ]);
+
         return true;
     }
 
@@ -48,9 +55,13 @@ class HueApi implements TrafficLightApiInterface
      */
     public function deactivateLight(string $id): bool
     {
-        /** @var Light $light */
-        $light = $this->client->sendCommand(new GetLightById($id));
-        $light->setOn(false);
+        $this->client->put("lights/{$id}/state", [
+            'json' => [
+                'on' => false,
+                'transitiontime' => 0
+            ]
+        ]);
+
         return true;
     }
 }

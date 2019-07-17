@@ -57,10 +57,7 @@ class TrafficLightExtension implements
         }
 
         $this->enabled = true;
-        $api = new HueApi(new HueCredentials(
-            getenv('TRAFFIC_LIGHT_BRIDGE_IP'),
-            getenv('TRAFFIC_LIGHT_BRIDGE_USER')
-        ));
+        $api = new HueApi;
 
         self::$trafficLight = new TrafficLight(
             new Light(self::RED_LIGHT_ID, $api),
