@@ -20,17 +20,17 @@ class TrafficLightExtension implements
     /**
      * @const int
      */
-    const RED_LIGHT_ID = 5;
+    const RED_LIGHT_ID = 2;
 
     /**
      * @const int
      */
-    const YELLOW_LIGHT_ID = 7;
+    const YELLOW_LIGHT_ID = 1;
 
     /**
      * @const int
      */
-    const GREEN_LIGHT_ID = 6;
+    const GREEN_LIGHT_ID = 3;
 
     /**
      * @var TrafficLight

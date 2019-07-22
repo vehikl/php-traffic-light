@@ -15,7 +15,7 @@ class HueApi implements TrafficLightApiInterface
     /**
      * @const string
      */
-    const BRIDGE_USER = '1wpU93QA4DHwT7udr7ad8rHtgFynLMAWLx2ZYRwe';
+    const BRIDGE_USER = 'WXxABEgt10-qa2XcYZrdIH1OYnQp2HjwupjK77nX';
 
     /**
      * @var Client
