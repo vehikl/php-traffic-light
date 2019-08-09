@@ -8,7 +8,7 @@
 ## Installation
 
 ```
-composer install vehikl/php-traffic-light
+composer require vehikl/php-traffic-light
 ```
 
 ## Usage
