@@ -3,7 +3,6 @@
 namespace PhpTrafficLight;
 
 use PhpTrafficLight\Hue\HueApi;
-use PhpTrafficLight\Hue\HueCredentials;
 use PHPUnit\Runner\AfterLastTestHook;
 use PHPUnit\Runner\AfterTestErrorHook;
 use PHPUnit\Runner\AfterTestFailureHook;
@@ -20,17 +19,17 @@ class TrafficLightExtension implements
     /**
      * @const int
      */
-    const RED_LIGHT_ID = 2;
+    const RED_LIGHT_ID = 4;
 
     /**
      * @const int
      */
-    const YELLOW_LIGHT_ID = 1;
+    const YELLOW_LIGHT_ID = 6;
 
     /**
      * @const int
      */
-    const GREEN_LIGHT_ID = 3;
+    const GREEN_LIGHT_ID = 5;
 
     /**
      * @var TrafficLight

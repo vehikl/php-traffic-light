@@ -10,7 +10,7 @@ class HueApi implements TrafficLightApiInterface
     /**
      * @const string
      */
-    const BRIDGE_IP = '192.168.231.245';
+    const BRIDGE_IP = '192.168.231.148';
 
     /**
      * @const string
